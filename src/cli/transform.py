@@ -44,7 +44,7 @@ def merge_df(processed_dfs):
         )
         merged_df = merged_df.loc[:, ~merged_df.columns.str.endswith('_drop')]
     
-    merged_df.dropna(inplace= True)
+    merged_df.dropna(how='all', inplace= True)
     return merged_df
 
 if __name__ == "__main__":    

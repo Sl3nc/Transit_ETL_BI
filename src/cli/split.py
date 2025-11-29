@@ -1,7 +1,6 @@
 from extract import extract_csv_files
 from transform import merge_and_transform_data
 import pandas as pd
-    
 
 def split_into_dimensions(df: pd.DataFrame):
     boletim_df = create_boletim_dimension(df)
@@ -21,11 +20,12 @@ def create_boletim_dimension(df: pd.DataFrame):
     
     boletim_df['pk_boletim'] = range(1, len(df) + 1)
     
-    boletim_df['numero'] = df['numero_boletim']
-    boletim_df['data'] = pd.to_datetime(df['data_boletim'])
-    boletim_df['mes'] = boletim_df['data'].dt.month.__str__()
-    boletim_df['ano'] = boletim_df['data'].dt.year.__str__()
-    boletim_df['dia'] = boletim_df['data'].dt.day.__str__()
+    boletim_df['numero'] = df['numero_boletim'].values
+   
+    boletim_df['data'] = pd.to_datetime(df['data_boletim'].values, format="%d/%m/%Y %H:%M")
+    boletim_df['mes'] = boletim_df['data'].dt.month
+    boletim_df['ano'] = boletim_df['data'].dt.year
+    boletim_df['dia'] = boletim_df['data'].dt.day
     
     boletim_df = boletim_df[['pk_boletim', 'numero', 'mes', 'ano', 'dia']]
     

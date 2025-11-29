@@ -4,7 +4,7 @@ from split import split_into_dimensions
 from yaml import safe_load
 from pathlib import Path
 
-def config_output() -> dict:
+def config_output() -> str:
     with open('config.yaml', 'r') as f:
         return safe_load(f).get('output_dir', 'output')
 
