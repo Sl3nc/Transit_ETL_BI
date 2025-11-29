@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: etl-postgres
+    environment:
+      POSTGRES_PASSWORD: etlpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - etl_pgdata:/var/lib/postgresql
+volumes:
+  etl_pgdata:

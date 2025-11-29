@@ -1,0 +1,27 @@
+openapi: 3.0.0
+info:
+  title: ETL Pipeline API
+  version: 1.0.0
+description: |
+  API contract for ETL pipeline operations (if exposed as a service)
+paths:
+  /etl/run:
+    post:
+      summary: Run ETL pipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source_dir:
+                  type: string
+                  description: Path to CSV files
+                config:
+                  type: object
+                  description: Column and table mapping config
+      responses:
+        '200':
+          description: ETL completed successfully
+        '400':
+          description: Invalid input or error during ETL

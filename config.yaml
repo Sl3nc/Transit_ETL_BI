@@ -1,0 +1,28 @@
+# ETL Pipeline Configuration
+postgres:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: etlpass
+  dbname: etl_db
+
+output_dir: output
+input_dir: data
+
+columns:
+  keep:
+    - numero_boletim
+    - indicador_fatalidade
+    - data_boletim
+    - desc_tipo_acidente
+    - desc_tempo
+    - pavimento
+    - desc_regional
+    - coordenada_x
+    - coordenada_y
+    - descricao_especie
+    - cinto_seguranca
+    - embreagues
+    - tipo_logradouro
+    - nome_logradouro
+    - nome_bairro
