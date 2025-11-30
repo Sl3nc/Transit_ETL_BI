@@ -41,11 +41,19 @@ def merge_df(processed_dfs):
     merged_df = processed_dfs[0]
     for df in processed_dfs[1:]:
         merged_df = pd.merge(
-            merged_df, df, on='numero_boletim', how='outer', suffixes=('', '_drop')
+            merged_df, df, on='numero_boletim', how='outer', suffixes=('_left', '_right')
         )
-        merged_df = merged_df.loc[:, ~merged_df.columns.str.endswith('_drop')]
-    
-    merged_df.dropna(how='all', inplace= True)
+
+        for col in merged_df.columns:
+            if col.endswith('_left'):
+                base_col = col[:-5] 
+                right_col = base_col + '_right'
+
+                if right_col in merged_df.columns:
+                    merged_df[base_col] = merged_df[col].combine_first(merged_df[right_col])
+                    merged_df.drop(columns=[col, right_col], inplace=True)
+
+    merged_df.dropna(how='all', inplace=True)
     return merged_df
 
 if __name__ == "__main__":    
