@@ -32,6 +32,7 @@ def merge_and_transform_data(dataframes: list[pd.DataFrame]) -> pd.DataFrame:
         ]
 
         if available_columns:
+            processed_df.drop_duplicates('numero_boletim', inplace=True, ignore_index=True)
             processed_dfs.append(processed_df[available_columns])
     
     return merge_df(processed_dfs)
