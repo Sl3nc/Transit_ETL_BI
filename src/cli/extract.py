@@ -12,7 +12,15 @@ def extract_csv_files():
     for subdir in data_dir.iterdir():
         for file in subdir.iterdir():
             if file.match('*.csv'):
-                df = pd.read_csv(file, encoding='latin1', delimiter=';')
+                df = pd.read_csv(
+                    file, 
+                    encoding='latin1', 
+                    delimiter=';',
+                    skipinitialspace=True,
+                    on_bad_lines='skip',
+                )
+                
+                df.columns = df.columns.str.lower()
                 dataframes.append(df)
                             
     return dataframes
