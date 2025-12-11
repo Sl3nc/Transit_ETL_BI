@@ -97,7 +97,7 @@ def create_acidente_dimension(df: pd.DataFrame):
         'desc_tipo_acidente',
     ]]
 
-    acidente_df['indicador_fatalidade'] = df[['indicador_fatalidade']].replace({'SIM': True, 'NÃO': False})
+    acidente_df['indicador_fatalidade'] = df[['indicador_fatalidade']].replace({'SIM': False, 'NÃO': True})
     acidente_df = acidente_df.rename(columns={
         'desc_tipo_acidente': 'descricao_tipo',
     })
